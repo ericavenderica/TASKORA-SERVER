@@ -18,6 +18,22 @@ Backend API for the Taskora project management application. Built with Node.js, 
 - User Authentication (Register, Login, JWT)
 - Task Management (CRUD operations)
 - Protected Routes (Middleware)
+- **CORS Enabled**: Configured to accept requests from the frontend (e.g., `http://localhost:5005`).
+
+## Project Structure
+
+The repository contains the backend code in the `server/` directory:
+
+```
+Taskora-Server/
+├── server/             # Backend Node.js application
+│   ├── middleware/     # Authentication middleware
+│   ├── models/         # Mongoose models (User, Task)
+│   ├── routes/         # API routes (Auth, Tasks)
+│   ├── server.js       # Entry point
+│   └── .env            # Environment variables
+└── README.md
+```
 
 ## Technologies
 
