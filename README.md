@@ -58,7 +58,7 @@ Taskora-Server/
    cd TASKORA-SERVER
    ```
 
-2. Install dependencies (navigate to the server directory if needed, though this repo structure seems to have `server/` content at root or inside server folder - *Adjusting based on actual structure*: The code is inside `server/` folder):
+2. Install dependencies:
 
    ```bash
    cd server
