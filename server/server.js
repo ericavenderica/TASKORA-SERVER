@@ -1,15 +1,8 @@
-const express = require('express');
+const app = require('./app');
 const mongoose = require('mongoose');
-const cors = require('cors');
 require('dotenv').config();
 
-const app = express();
-
-//middleware
-app.use(express.json());
-app.use(cors());
-
-//DB Config
+//DB config
 const db = process.env.MONGO_URI;
 
 //connect to MongoDB
@@ -17,11 +10,6 @@ mongoose
   .connect(db)
   .then(() => console.log('MongoDB Connected'))
   .catch(err => console.log(err));
-
-// Routes
-app.use('/api/auth', require('./routes/auth'));
-app.use('/api/tasks', require('./routes/tasks'));
-app.use('/api/categories', require('./routes/categories'));
 
 const PORT = process.env.PORT || 5000;
 

@@ -55,7 +55,7 @@ Production mode:
 npm start
 ```
 
-The server will launch on `http://localhost:5000`.
+The server will launch on `http://localhost:5005`.
 
 ## API Reference
 
