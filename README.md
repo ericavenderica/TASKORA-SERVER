@@ -43,16 +43,6 @@ The backend API for the Taskora project management application. This server prov
    npm install
    ```
 
-### Configuration
-
-Create a `.env` file in the `server` directory with the following variables:
-
-```env
-PORT=5000
-MONGO_URI=mongodb://127.0.0.1:27017/taskora
-JWT_SECRET=your_super_secret_key
-```
-
 ### Running the Application
 
 Development mode (with auto-reload):
