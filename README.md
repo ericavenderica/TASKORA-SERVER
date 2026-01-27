@@ -1,109 +1,87 @@
 # Taskora Server
 
-Backend API for the Taskora project management application. Built with Node.js, Express, and MongoDB.
-
-## Table of Contents
-
-- [Features](#features)
-- [Technologies](#technologies)
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-  - [Environment Variables](#environment-variables)
-  - [Running the Server](#running-the-server)
-- [API Endpoints](#api-endpoints)
+The backend API for the Taskora project management application. This server provides authentication and task management capabilities using Node.js, Express, and MongoDB.
 
 ## Features
 
-- User Authentication (Register, Login, JWT)
-- Task Management (CRUD operations)
-- Protected Routes (Middleware)
-- **CORS Enabled**: Configured to accept requests from the frontend (e.g., `http://localhost:5005`).
+- **Authentication**: Secure user registration and login using JWT (JSON Web Tokens).
+- **Task Management**: Create, read, update, and delete tasks.
+- **Security**: Password hashing with bcryptjs and protected routes.
+- **CORS Support**: Configured for frontend integration.
 
-## Project Structure
+## Tech Stack
 
-The repository contains the backend code in the `server/` directory:
-
-```
-Taskora-Server/
-├── server/             # Backend Node.js application
-│   ├── middleware/     # Authentication middleware
-│   ├── models/         # Mongoose models (User, Task)
-│   ├── routes/         # API routes (Auth, Tasks)
-│   ├── server.js       # Entry point
-│   └── .env            # Environment variables
-└── README.md
-```
-
-## Technologies
-
-- **Runtime**: Node.js
-- **Framework**: Express.js
-- **Database**: MongoDB (with Mongoose)
-- **Authentication**: JSON Web Tokens (JWT) & bcryptjs
-- **CORS**: Enabled for frontend communication
+- **Node.js**: Runtime environment.
+- **Express**: Web framework.
+- **MongoDB**: NoSQL database.
+- **Mongoose**: ODM for MongoDB.
+- **JWT**: Stateless authentication.
 
 ## Getting Started
 
 ### Prerequisites
 
-- Node.js installed
-- MongoDB installed and running locally or a MongoDB Atlas URI
+- Node.js (v14 or higher recommended)
+- MongoDB (Local instance or Atlas URI)
+- Git
 
 ### Installation
 
 1. Clone the repository:
    ```bash
    git clone https://github.com/ericavenderica/TASKORA-SERVER.git
+   ```
+
+2. Navigate to the project directory:
+   ```bash
    cd TASKORA-SERVER
    ```
 
-2. Install dependencies:
-
+3. Install dependencies:
    ```bash
    cd server
    npm install
    ```
 
-### Environment Variables
+### Configuration
 
 Create a `.env` file in the `server` directory with the following variables:
 
 ```env
 PORT=5000
 MONGO_URI=mongodb://127.0.0.1:27017/taskora
-JWT_SECRET=your_jwt_secret_key
+JWT_SECRET=your_super_secret_key
 ```
 
-### Running the Server
+### Running the Application
 
-Inside the `server` directory:
-
+Development mode (with auto-reload):
 ```bash
-# Run in development mode (with nodemon)
 npm run dev
+```
 
-# Run in production mode
+Production mode:
+```bash
 npm start
 ```
 
-The server will start on `http://localhost:5000` (or your specified PORT).
+The server will launch on `http://localhost:5000`.
 
-## API Endpoints
+## API Reference
 
-### Authentication (`/api/auth`)
+### Auth
 
-- **POST** `/register` - Register a new user
-  - Body: `{ name, email, password }`
-- **POST** `/login` - Login user and get token
-  - Body: `{ email, password }`
-- **GET** `/me` - Get current user info (Protected)
+| Method | Endpoint        | Description           | Auth Required |
+| :----- | :-------------- | :-------------------- | :------------ |
+| POST   | `/api/auth/register` | Register a new user   | No            |
+| POST   | `/api/auth/login`    | Login user            | No            |
+| GET    | `/api/auth/me`       | Get current user info | Yes           |
 
-### Tasks (`/api/tasks`)
+### Tasks
 
-- **GET** `/` - Get all tasks for the logged-in user
-- **POST** `/` - Create a new task
-  - Body: `{ title, description, priority, dueDate }`
-- **PUT** `/:id` - Update a task
-  - Body: `{ title, description, priority, completed, dueDate }`
-- **DELETE** `/:id` - Delete a task
+| Method | Endpoint        | Description           | Auth Required |
+| :----- | :-------------- | :-------------------- | :------------ |
+| GET    | `/api/tasks`         | Get all user tasks    | Yes           |
+| POST   | `/api/tasks`         | Create a task         | Yes           |
+| PUT    | `/api/tasks/:id`     | Update a task         | Yes           |
+| DELETE | `/api/tasks/:id`     | Delete a task         | Yes           |
