@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const auth = require('../middleware/auth');
-const Task = require('../models/Task');
+const Task = require('../models/task.model');
 
 
 router.get('/', auth, async (req, res) => {
@@ -40,7 +40,7 @@ router.post('/', auth, async (req, res) => {
 router.put('/:id', auth, async (req, res) => {
   const { title, description, priority, completed, dueDate, categories } = req.body;
 
-  //building task object
+  //building project object
   const taskFields = {};
   if (title) taskFields.title = title;
   if (description) taskFields.description = description;
@@ -52,7 +52,7 @@ router.put('/:id', auth, async (req, res) => {
   try {
     let task = await Task.findById(req.params.id);
 
-    if (!task) return res.status(404).json({ msg: 'Task not found' });
+    if (!task) return res.status(404).json({ msg: 'Project not found' });
 
     if (task.user.toString() !== req.user.id) {
       return res.status(401).json({ msg: 'Not authorized' });
@@ -76,7 +76,7 @@ router.delete('/:id', auth, async (req, res) => {
   try {
     let task = await Task.findById(req.params.id);
 
-    if (!task) return res.status(404).json({ msg: 'Task not found' });
+    if (!task) return res.status(404).json({ msg: 'Project not found' });
 
     if (task.user.toString() !== req.user.id) {
       return res.status(401).json({ msg: 'Not authorized' });
@@ -84,7 +84,7 @@ router.delete('/:id', auth, async (req, res) => {
 
     await Task.findByIdAndDelete(req.params.id);
 
-    res.json({ msg: 'Task removed' });
+    res.json({ msg: 'Project removed' });
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');

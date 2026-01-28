@@ -1,11 +1,11 @@
 # Taskora Server
 
-The backend API for the Taskora project management application. This server provides authentication and task management capabilities using Node.js, Express, and MongoDB.
+The backend API for the Taskora project management application. This server provides authentication and project management capabilities using Node.js, Express, and MongoDB.
 
 ## Features
 
 - **Authentication**: Secure user registration and login using JWT (JSON Web Tokens).
-- **Task Management**: Create, read, update, and delete tasks.
+- **Project Management**: Create, read, update, and delete projects.
 - **Security**: Password hashing with bcryptjs and protected routes.
 - **CORS Support**: Configured for frontend integration.
 
@@ -67,11 +67,11 @@ The server will launch on `http://localhost:5005`.
 | POST   | `/api/auth/login`    | Login user            | No            |
 | GET    | `/api/auth/me`       | Get current user info | Yes           |
 
-### Tasks
+### Projects
 
 | Method | Endpoint        | Description           | Auth Required |
 | :----- | :-------------- | :-------------------- | :------------ |
-| GET    | `/api/tasks`         | Get all user tasks    | Yes           |
-| POST   | `/api/tasks`         | Create a task         | Yes           |
-| PUT    | `/api/tasks/:id`     | Update a task         | Yes           |
-| DELETE | `/api/tasks/:id`     | Delete a task         | Yes           |
+| GET    | `/api/projects`         | Get all user projects    | Yes           |
+| POST   | `/api/projects`         | Create a project         | Yes           |
+| PUT    | `/api/projects/:id`     | Update a project         | Yes           |
+| DELETE | `/api/projects/:id`     | Delete a project         | Yes           |

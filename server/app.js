@@ -1,15 +1,27 @@
-const express = require('express');
-const cors = require('cors');
+// Gets access to environment variables/settings
+require("dotenv").config();
+
+// Connects to the database
+require("./db");
+
+// Handles http requests (express is node js framework)
+const express = require("express");
 
 const app = express();
 
-//middleware
-app.use(express.json());
-app.use(cors());
+// Middlewares configuration
+require("./config")(app);
 
-//routes
-app.use('/api/auth', require('./routes/auth'));
-app.use('/api/tasks', require('./routes/tasks'));
-app.use('/api/categories', require('./routes/categories'));
+// Routes
+app.get("/api", (req, res, next) => {
+  res.json("All good in here");
+});
+
+app.use("/api/auth", require("./routes/auth.routes"));
+app.use("/api/projects", require("./routes/tasks.routes"));
+app.use("/api/categories", require("./routes/categories.routes"));
+
+// Error handling middleware
+require("./error-handling")(app);
 
 module.exports = app;

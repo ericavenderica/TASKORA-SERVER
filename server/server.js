@@ -1,16 +1,8 @@
-const app = require('./app');
-const mongoose = require('mongoose');
-require('dotenv').config();
+const app = require("./app");
 
-//DB config
-const db = process.env.MONGO_URI;
+// Sets the PORT for our app. If no env has been set, we use 5005
+const PORT = process.env.PORT || 5005;
 
-//connect to MongoDB
-mongoose
-  .connect(db)
-  .then(() => console.log('MongoDB Connected'))
-  .catch(err => console.log(err));
-
-const PORT = process.env.PORT || 5000;
-
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+app.listen(PORT, () => {
+  console.log(`Server listening on http://localhost:${PORT}`);
+});
