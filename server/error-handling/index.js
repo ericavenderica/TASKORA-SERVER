@@ -1,6 +1,6 @@
 module.exports = (app) => {
   app.use((req, res, next) => {
-    // this middleware runs whenever no other route is available
+    //handle 404 errors
     res.status(404).json({ message: "This route does not exist" });
   });
 
