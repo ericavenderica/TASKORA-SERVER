@@ -9,7 +9,7 @@ router.get('/', auth, async (req, res) => {
     const categories = await Category.find({ user: req.user.id }).sort({ date: -1 });
     res.json(categories);
   } catch (err) {
-    console.error(err.message);
+    console.error(err);
     res.status(500).send('Server Error');
   }
 });
@@ -28,7 +28,7 @@ router.post('/', auth, async (req, res) => {
     const category = await newCategory.save();
     res.json(category);
   } catch (err) {
-    console.error(err.message);
+    console.error(err);
     res.status(500).send('Server Error');
   }
 });
@@ -39,12 +39,12 @@ router.delete('/:id', auth, async (req, res) => {
     const category = await Category.findById(req.params.id);
 
     if (!category) {
-      return res.status(404).json({ msg: 'Category not found' });
+      return res.status(404).json({ errorMessage: 'Category not found' });
     }
 
     //check user
     if (category.user.toString() !== req.user.id) {
-      return res.status(401).json({ msg: 'User not authorized' });
+      return res.status(401).json({ errorMessage: 'User not authorized' });
     }
 
     await category.deleteOne();
@@ -52,7 +52,7 @@ router.delete('/:id', auth, async (req, res) => {
   } catch (err) {
     console.error(err.message);
     if (err.kind === 'ObjectId') {
-      return res.status(404).json({ msg: 'Category not found' });
+      return res.status(404).json({ errorMessage: 'Category not found' });
     }
     res.status(500).send('Server Error');
   }

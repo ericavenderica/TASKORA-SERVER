@@ -9,7 +9,7 @@ router.get('/', auth, async (req, res) => {
     const tasks = await Task.find({ user: req.user.id }).sort({ createdAt: -1 });
     res.json(tasks);
   } catch (err) {
-    console.error(err.message);
+    console.log(err);
     res.status(500).send('Server Error');
   }
 });
@@ -31,7 +31,7 @@ router.post('/', auth, async (req, res) => {
     const task = await newTask.save();
     res.json(task);
   } catch (err) {
-    console.error(err.message);
+    console.log(err);
     res.status(500).send('Server Error');
   }
 });
@@ -52,10 +52,10 @@ router.put('/:id', auth, async (req, res) => {
   try {
     let task = await Task.findById(req.params.id);
 
-    if (!task) return res.status(404).json({ msg: 'Project not found' });
+    if (!task) return res.status(404).json({ message: 'Project not found' });
 
     if (task.user.toString() !== req.user.id) {
-      return res.status(401).json({ msg: 'Not authorized' });
+      return res.status(401).json({ message: 'Not authorized' });
     }
 
     task = await Task.findByIdAndUpdate(
@@ -66,7 +66,7 @@ router.put('/:id', auth, async (req, res) => {
 
     res.json(task);
   } catch (err) {
-    console.error(err.message);
+    console.log(err);
     res.status(500).send('Server Error');
   }
 });
@@ -76,17 +76,17 @@ router.delete('/:id', auth, async (req, res) => {
   try {
     let task = await Task.findById(req.params.id);
 
-    if (!task) return res.status(404).json({ msg: 'Project not found' });
+    if (!task) return res.status(404).json({ message: 'Project not found' });
 
     if (task.user.toString() !== req.user.id) {
-      return res.status(401).json({ msg: 'Not authorized' });
+      return res.status(401).json({ message: 'Not authorized' });
     }
 
     await Task.findByIdAndDelete(req.params.id);
 
     res.json({ msg: 'Project removed' });
   } catch (err) {
-    console.error(err.message);
+    console.log(err);
     res.status(500).send('Server Error');
   }
 });
