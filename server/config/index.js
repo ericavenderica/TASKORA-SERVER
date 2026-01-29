@@ -4,7 +4,6 @@ const cors = require("cors");
 
 // Middleware configuration
 module.exports = (app) => {
-  // In development, we use morgan to log requests
   app.use(logger("dev"));
 
   app.use(express.json());
@@ -12,7 +11,7 @@ module.exports = (app) => {
 
   app.use(
     cors({
-      origin: [process.env.ORIGIN, "http://localhost:5173"]
+      origin: [process.env.ORIGIN, "http://localhost:5173", "https://taskorabyerica.netlify.app"]
     })
   );
 };
