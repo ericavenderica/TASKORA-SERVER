@@ -75,3 +75,6 @@ The server will launch on `http://localhost:5005`.
 | POST   | `/api/projects`         | Create a project         | Yes           |
 | PUT    | `/api/projects/:id`     | Update a project         | Yes           |
 | DELETE | `/api/projects/:id`     | Delete a project         | Yes           |
+
+---
+*Created for IronHack Project*
